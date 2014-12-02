@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ember test application</title>
+  <link href="/static/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+</head>
+<body>
+    <script type="text/x-handlebars" data-template-name="application">
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div id="navbar-header">
+          <h2 class="navbar-brand">{{#linkTo 'index'}}Books management{{/linkTo}}</h2>
+        </div>
+        <div id="navbar">
+          <ul class="nav navbar-nav">
+            <li class="active">
+                {{#linkTo "books"}}Books{{/linkTo}}
+            </li>
+            <li>
+                {{#linkTo "about"}}About{{/linkTo}}
+            </li>
+            <li>
+                {{#linkTo "contacts"}}Contacts{{/linkTo}}
+            </li>
+            <li>
+              {{#linkTo "books.new"}}
+                <button class="btn btn-success">Publish book</button>
+              {{/linkTo}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+   <div class="container">
+     <div class="row">{{outlet}}</div>
+   </div>
+   </script>
+   <script type="text/x-handlebars" data-template-name="books/index">
+      <h3 class="page-header">Books</h3>
+      <table class="table table-striped">
+      <tbody>
+        {{#each book in model}}
+          <tr>
+            <td width="10%">
+              <img src="{{ book.image_url }}"/>
+            </td>
+            <td><h4>{{#linkTo "book" book.id}}{{ book.title }}{{/linkTo}}</h4></td>   
+         </tr>
+        {{/each}}
+      </tbody>
+      </table>
+   </script>
+   <script type="text/x-handlebars" data-template-name="about">
+    <h3 class="page-header">About</h3>
+   </script>
+   <script type="text/x-handlebars" data-template-name="contacts">
+    <h3 class="page-header">Contacts</h3>
+   </script>
+   <script type="text/x-handlebars" data-template-name="book">
+      {{#with model }}
+      <div class="col-md-2">
+        <img src="{{image_url}}" class="image-responsive"/>
+      </div>
+      <div class="col-md-8">
+        <h3>{{title}}</h3>
+        <div>{{content}}</div>
+      </div>
+      {{/with}}
+   </script>
+   <script type="text/x-handlebars" data-template-name="books/new">
+    <h3 class="page-header">Publish new book</h3>
+   </script>
+   
+   <!-- libs -->
+   <script src="/static/libs/jquery/dist/jquery.min.js"></script>
+   <script src="/static/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+   <script src="/static/libs/handlebars/handlebars.min.js"></script>
+   <script src="/static/libs/ember/ember.min.js"></script>
+   <script src="/static/libs/ember-data/ember-data.min.js"></script>
+
+   <!-- Application -->
+   <script src="/static/js/app.js"></script>
+   <script src="/static/js/router.js"></script>
+   <script src="/static/js/models/book.js"></script>
+</body>
+</html>
